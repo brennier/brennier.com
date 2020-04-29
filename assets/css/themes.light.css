@@ -123,7 +123,7 @@ h6 {
 a,
 .t-link-container .t-link-container__item,
 .t-link-container:hover .t-link-container__item--blended {
-  color: var(--main-accent-color);
+  color: var(--hover-accent-color);
 }
 
 /* Hover Links */
@@ -223,7 +223,7 @@ hr,
 .t-social-button:hover .far,
 .t-social-button:hover .fal,
 .t-social-button:hover .fab {
-  color: var(--main-accent-color);
+  color: var(--hover-accent-color);
 }
 
 /* Image Overlay
