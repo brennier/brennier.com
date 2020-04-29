@@ -44,10 +44,10 @@
     --hover-accent-color: var(--dark-red);
     --ruler-color: var(--text-4);
 
-    --background-1: #e7e7e7;
-    --background-2: #fffffc;
-    --background-3: #eeeeee;
-    --background-4: #fffffc;
+    --background-1: #e0e4e4;
+    --background-2: #fbffff;
+    --background-3: #eaeeee;
+    --background-4: #fbffff;
 }
 
 .a-header .o-content__body {
