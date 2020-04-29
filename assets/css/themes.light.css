@@ -50,6 +50,10 @@
     --background-4: #fffffc;
 }
 
+.c-header__contact h3 {
+  color: var(--main-accent-color);
+}
+
 ul {
   font-size: 125%;
 }
@@ -98,9 +102,6 @@ h6 {
 .o-section__heading {
   color: var(--blue);
 }
-
-
-
 
 /* Link Container */
 .t-link-container {
