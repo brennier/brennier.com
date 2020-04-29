@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
 
     $('html').addClass('js-enabled');
@@ -18,8 +15,6 @@ $(document).ready(function() {
     });
 
 });
-
-
 
 function setup_progress_bar_animation()
 {
