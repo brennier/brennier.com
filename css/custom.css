@@ -58,8 +58,10 @@
   color: var(--main-accent-color);
 }
 
-ul {
-  font-size: 125%;
+@media (min-width: 760px) {
+    ul {
+      font-size: 125%;
+    }
 }
 
 .c-button {
