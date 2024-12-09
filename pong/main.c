@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 #define DRAG_COEFFICIENT .01
 #define FRICTION_COEFFICIENT 1
@@ -149,8 +150,7 @@ void grannyInAnimation(int frameCounter) {
 }
 
 int main() {
-    unsigned int seed;
-    srand(seed);
+    srand(time(NULL));
 
     Ball ballArray[MAX_BALL_COUNT];
     char message[200];
@@ -347,7 +347,9 @@ int main() {
         DrawText("The first person to score 20 points wins", 20, 10, 20, WHITE);
 
         if (mode == EXTREME || mode == EXTREME_IN) {
-            DrawText("EXTREME PONG!", screenWidth / 4, screenHeight / 5, 64, randomColor());
+            int xOffset = rand() % 10 - 5;
+            int yOffset = rand() % 10 - 5;
+            DrawText("EXTREME PONG!", screenWidth / 4 + xOffset, screenHeight / 5 + yOffset, 64, randomColor());
         } else if (mode == WON) {
             DrawText("You won! :)", screenWidth / 2 - 125, screenHeight / 5, 64, WHITE);
         } else if (mode == LOST) {
