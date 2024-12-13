@@ -4,10 +4,10 @@
 #include <time.h>
 
 #define M_PI 3.14159265358979323846  /* pi */
-#define SCREENWIDTH 1600
-#define SCREENHEIGHT 640
-#define MAPSIZE 640
-#define BLOCKSIZE 32
+#define SCREENWIDTH 1920
+#define SCREENHEIGHT 720
+#define MAPSIZE 720
+#define BLOCKSIZE 36
 #define RAYCASTPIXELWIDTH 8
 #define VIEWANGLE 60.0 // in degrees
 
@@ -234,8 +234,8 @@ void drawColumn(float block_distance, int view_column, Color color) {
     int column_height = SCREENHEIGHT / block_distance;
     int yOffSet = (SCREENHEIGHT - column_height) / 2;
 
-    DrawRectangle(view_center + column_offset * RAYCASTPIXELWIDTH, 0, RAYCASTPIXELWIDTH, SCREENHEIGHT / 2, LIGHTBLUE);
-    DrawRectangle(view_center + column_offset * RAYCASTPIXELWIDTH, SCREENHEIGHT / 2, RAYCASTPIXELWIDTH, SCREENHEIGHT / 2, DARKBROWN);
+    DrawRectangleGradientV(view_center + column_offset * RAYCASTPIXELWIDTH, 0, RAYCASTPIXELWIDTH, SCREENHEIGHT / 2, BLUE, LIGHTBLUE);
+    DrawRectangleGradientV(view_center + column_offset * RAYCASTPIXELWIDTH, SCREENHEIGHT / 2, RAYCASTPIXELWIDTH, SCREENHEIGHT / 2, DARKBROWN, BROWN);
     DrawRectangle(view_center + column_offset * RAYCASTPIXELWIDTH, yOffSet, RAYCASTPIXELWIDTH, column_height, color);
 }
 
@@ -290,9 +290,9 @@ int main() {
                 DrawLineV(Vector2Add(player.pos, Vector2Scale(Vector2Rotate(player.angle, angle), player.size)), ray_end_point, RED);
 
             if (ray_hit_horizontal)
-                drawColumn(distance / BLOCKSIZE, view_column, (Color){0, Clamp((int)(255.0 / block_distance), 0, 200),0,255});
+                drawColumn(distance / BLOCKSIZE, view_column, (Color){0, Lerp(50, 225, Clamp(1.0f / block_distance, 0.0, 1.0)), 0, 255});
             else
-                drawColumn(distance / BLOCKSIZE, view_column, (Color){0, Clamp((int)(512.0 / block_distance), 0,255),0,255});
+                drawColumn(distance / BLOCKSIZE, view_column, (Color){0, 15 + Lerp(50, 225, Clamp(1.0f / block_distance, 0.0, 1.0)), 0, 255});
         }
 
         /* DrawFPS(10, 10); */
