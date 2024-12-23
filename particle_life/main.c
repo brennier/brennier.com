@@ -139,10 +139,9 @@ int main(void)
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Particle Simulation");
     SetWindowState(FLAG_WINDOW_RESIZABLE);
     int monitor = GetCurrentMonitor();
-    SCREENHEIGHT = GetMonitorHeight(monitor) * .8;
-    SCREENWIDTH = GetMonitorWidth(monitor) * .8;
+    SCREENHEIGHT = GetMonitorHeight(monitor);
+    SCREENWIDTH = GetMonitorWidth(monitor);
     SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
-    SetWindowPosition(SCREENWIDTH * .1, SCREENHEIGHT * .1);
 
     for (int i = 0; i < MAXPARTICLES / 2; i++)
     { 
@@ -156,6 +155,7 @@ int main(void)
         {
             SCREENHEIGHT = GetScreenHeight();
             SCREENWIDTH = GetScreenWidth();
+            SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
         }
         int touch_count = GetTouchPointCount();
         if (touch_count > MAX_TOUCH_POINTS)
