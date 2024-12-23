@@ -6,12 +6,13 @@
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
-#define SCREENWIDTH 1600
-#define SCREENHEIGHT 900
 #define RANDOMSPEED 500
 #define MAXPARTICLES 2000
 #define PARTICLE_SIZE 2
 #define MAX_TOUCH_POINTS 3
+
+int SCREENWIDTH = 600;
+int SCREENHEIGHT = 800;
 
 #define FRICTION_FACTOR 10
 #define FORCE_FACTOR 5
@@ -75,7 +76,7 @@ void generate_from_seed(unsigned int seed)
     set_seed(seed);
 
     for (int i = 0; i < 6; i++)
-        RADIUS_MAX[i] = (random_int() % 50) + 50;
+        RADIUS_MAX[i] = (random_int() % 25) + 25;
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 6; j++)
             force_matrix[i][j] = random_float() * 2.0 - 1.0;
@@ -136,6 +137,12 @@ int main(void)
     generate_from_seed(seed);
 
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Particle Simulation");
+    SetWindowState(FLAG_WINDOW_RESIZABLE);
+    int monitor = GetCurrentMonitor();
+    SCREENHEIGHT = GetMonitorHeight(monitor) - 200;
+    SCREENWIDTH = GetMonitorWidth(monitor) - 200;
+    SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
+    SetWindowPosition(100, 100);
 
     for (int i = 0; i < MAXPARTICLES / 2; i++)
     { 
@@ -145,6 +152,11 @@ int main(void)
 
     while(!WindowShouldClose())
     {
+        if (IsWindowResized())
+        {
+            SCREENHEIGHT = GetScreenHeight();
+            SCREENWIDTH = GetScreenWidth();
+        }
         int touch_count = GetTouchPointCount();
         if (touch_count > MAX_TOUCH_POINTS)
             touch_count = MAX_TOUCH_POINTS;
@@ -231,12 +243,12 @@ int main(void)
         char message[100];
         Color T_YELLOW = YELLOW;
         T_YELLOW.a = 225;
-        DrawRectangle(0, 0, 200, 100, T_YELLOW);
+        DrawRectangle(0, 0, 155, 75, T_YELLOW);
         sprintf(message, "FPS: %d\nParticles: %04d\nSeed: %04d", GetFPS(), particle_count, seed);
-        DrawText(message, 10, 10, 24, BLACK);
+        DrawText(message, 5, 5, 20, BLACK);
 
-        GuiSetStyle(DEFAULT, TEXT_SIZE, 48);
-        if ( GuiButton((Rectangle){ SCREENWIDTH - 300, SCREENHEIGHT - 100, 250, 75 }, "Reset") ){
+        GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
+        if ( GuiButton((Rectangle){ SCREENWIDTH - 155, SCREENHEIGHT - 55, 150, 50 }, "Reset") ){
             seed = random_int() % 10000;
             generate_from_seed(seed);
             particle_count = 0;
