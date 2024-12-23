@@ -137,12 +137,12 @@ int main(void)
     generate_from_seed(seed);
 
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Particle Simulation");
-    //SetWindowState(FLAG_WINDOW_RESIZABLE);
-    //int monitor = GetCurrentMonitor();
-    //SCREENHEIGHT = GetMonitorHeight(monitor) - 200;
-    //SCREENWIDTH = GetMonitorWidth(monitor) - 200;
-    //SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
-    //SetWindowPosition(100, 100);
+    SetWindowState(FLAG_WINDOW_RESIZABLE);
+    int monitor = GetCurrentMonitor();
+    SCREENHEIGHT = GetMonitorHeight(monitor) - 200;
+    SCREENWIDTH = GetMonitorWidth(monitor) - 200;
+    SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
+    SetWindowPosition(100, 100);
 
     for (int i = 0; i < MAXPARTICLES / 2; i++)
     { 
