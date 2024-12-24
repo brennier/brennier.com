@@ -7,16 +7,16 @@
 #include "raygui.h"
 
 #define RANDOMSPEED 500
-#define MAXPARTICLES 2000
+#define MAXPARTICLES 3000
 #define PARTICLE_SIZE 2
 #define MAX_TOUCH_POINTS 3
 
-int SCREENWIDTH = 600;
-int SCREENHEIGHT = 800;
+int SCREENWIDTH = 1200;
+int SCREENHEIGHT = 1600;
 
 #define FRICTION_FACTOR 10
-#define FORCE_FACTOR 5
-//#define RADIUS_MAX 300
+#define FORCE_FACTOR 10
+#define RADIUS_MAX 50
 #define RADIUS_MIN .2
 
 static unsigned long int next = 1;
@@ -36,7 +36,7 @@ void set_seed(unsigned int seed) {
     next = seed;
 }
 
-int RADIUS_MAX[6] = { 100, 100, 100, 150, 150, 150 };
+int particle_radius[6] = { 100, 100, 100, 150, 150, 150 };
 
 typedef enum
 {
@@ -76,7 +76,7 @@ void generate_from_seed(unsigned int seed)
     set_seed(seed);
 
     for (int i = 0; i < 6; i++)
-        RADIUS_MAX[i] = (random_int() % 25) + 25;
+        particle_radius[i] = (random_int() % (RADIUS_MAX / 2)) + (RADIUS_MAX / 2);
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 6; j++)
             force_matrix[i][j] = random_float() * 2.0 - 1.0;
@@ -142,6 +142,7 @@ int main(void)
     SCREENHEIGHT = GetMonitorHeight(monitor);
     SCREENWIDTH = GetMonitorWidth(monitor);
     SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
+    SetWindowSize(SCREENWIDTH, SCREENHEIGHT);
 
     for (int i = 0; i < MAXPARTICLES / 2; i++)
     { 
@@ -196,7 +197,7 @@ int main(void)
                     continue;
                 
                 Vector2 direction = Vector2Subtract(particles[j].pos, particles[i].pos);
-                int max_radius = RADIUS_MAX[particles[j].type];
+                int max_radius = particle_radius[particles[j].type];
 
                 if (direction.x > SCREENWIDTH - max_radius)
                     direction.x -= SCREENWIDTH;
